@@ -13,24 +13,25 @@ import javax.validation.constraints.Size;
 
 import com.sun.istack.NotNull;
 
-@Entity
-@Table(name = "postagem")
-public class Postagem {
+@Entity(name="postagem")
+public class PostagemModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@NotNull
-	@Size(min = 5, max = 100)
+	@Size(min = 5, max = 100, message = "Por favor digite um título entre 5 e  100 caracteres")
 	private String titulo;
 	
 	@NotNull
-	@Size(min = 10, max = 500)
+	@Size(min = 10, max = 500, message = "Por favor digite uma mensagem entre 10 e 500 caracteres")
 	private String texto;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
+	
+	//Getters e Setters --> Tornando os atributos publicos
 	public long getId() {
 		return id;
 	}
