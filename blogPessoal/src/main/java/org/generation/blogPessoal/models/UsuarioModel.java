@@ -1,4 +1,4 @@
-package org.generation.blogPessoal.model;
+package org.generation.blogPessoal.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,6 +56,4 @@ public class UsuarioModel {
 		this.senha = senha;
 	}
 
-	
-	
 }
