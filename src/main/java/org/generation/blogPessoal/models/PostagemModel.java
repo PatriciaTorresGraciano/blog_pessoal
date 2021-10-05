@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import com.sun.istack.NotNull;
 
 @Entity(name = "postagem")
-public class Postagem {
+public class PostagemModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
