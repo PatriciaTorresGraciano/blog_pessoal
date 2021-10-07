@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.generation.blogPessoal.models.PostagemModel;
-import org.generation.blogPessoal.repositories.PostagemRepository;
+import org.generation.blogPessoal.models.UsuarioModel;
+import org.generation.blogPessoal.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,41 +20,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("blog/postagens")
+@RequestMapping("blog/usuarios")
 @CrossOrigin("*")
 
-public class PostagemController {
-	
+public class UsuarioController {
+
 	@Autowired
-	private PostagemRepository repository;
+	private UsuarioRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<List<PostagemModel>> getAll(){
+	public ResponseEntity<List<UsuarioModel>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<Optional<PostagemModel>> getById(@PathVariable long id){
+	public ResponseEntity<Optional<UsuarioModel>> getById(@PathVariable long id){
 		return ResponseEntity.ok(repository.findById(id));
 	}
 	
-	@GetMapping("{titulo}")
-	public ResponseEntity<PostagemModel> getByTitulo(@PathVariable String titulo){
-		return ResponseEntity.ok(repository.findByTitulo(titulo));
+	@GetMapping("{usuario}")
+	public ResponseEntity<List<UsuarioModel>> getByTitulo(@PathVariable String nome){
+		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));
 	}
 	
 	@PostMapping
-	public ResponseEntity<PostagemModel> post (@Valid @RequestBody PostagemModel novaPostagem){
-		return ResponseEntity.status(201).body(repository.save(novaPostagem));
+	public ResponseEntity<UsuarioModel> post (@Valid @RequestBody UsuarioModel novoUsuario){
+		return ResponseEntity.status(201).body(repository.save(novoUsuario));
 	}
 	
 	@PutMapping
-	public ResponseEntity<PostagemModel> put (@Valid @RequestBody PostagemModel novaPostagem){
-		return ResponseEntity.status(201).body(repository.save(novaPostagem));
+	public ResponseEntity<UsuarioModel> put (@Valid @RequestBody UsuarioModel usuario){
+		return ResponseEntity.status(201).body(repository.save(usuario));
 	}
 
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {
 		repository.deleteById(id);
 	}
+
 }

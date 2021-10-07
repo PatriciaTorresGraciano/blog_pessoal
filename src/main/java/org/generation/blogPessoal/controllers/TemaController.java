@@ -6,7 +6,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.generation.blogPessoal.models.PostagemModel;
-import org.generation.blogPessoal.repositories.PostagemRepository;
+import org.generation.blogPessoal.models.TemaModel;
+import org.generation.blogPessoal.repositories.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,37 +21,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("blog/postagens")
+@RequestMapping("blog/temas")
 @CrossOrigin("*")
 
-public class PostagemController {
-	
+public class TemaController {
+
 	@Autowired
-	private PostagemRepository repository;
+	private TemaRepository repository;
 	
 	@GetMapping
-	public ResponseEntity<List<PostagemModel>> getAll(){
+	public ResponseEntity<List<TemaModel>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
 	@GetMapping("{id}")
-	public ResponseEntity<Optional<PostagemModel>> getById(@PathVariable long id){
+	public ResponseEntity<Optional<TemaModel>> getById(@PathVariable long id){
 		return ResponseEntity.ok(repository.findById(id));
 	}
 	
-	@GetMapping("{titulo}")
-	public ResponseEntity<PostagemModel> getByTitulo(@PathVariable String titulo){
-		return ResponseEntity.ok(repository.findByTitulo(titulo));
+	@GetMapping("/{id_tema}")
+	public ResponseEntity<List<TemaModel>> getByTitulo(@PathVariable String id_tema){
+		return ResponseEntity.ok(repository.findAllByTemaContainingIgnoreCase(id_tema));
 	}
 	
 	@PostMapping
-	public ResponseEntity<PostagemModel> post (@Valid @RequestBody PostagemModel novaPostagem){
+	public ResponseEntity<TemaModel> post (@Valid @RequestBody TemaModel novaPostagem){
 		return ResponseEntity.status(201).body(repository.save(novaPostagem));
 	}
 	
 	@PutMapping
-	public ResponseEntity<PostagemModel> put (@Valid @RequestBody PostagemModel novaPostagem){
-		return ResponseEntity.status(201).body(repository.save(novaPostagem));
+	public ResponseEntity<TemaModel> put (@Valid @RequestBody TemaModel tema){
+		return ResponseEntity.status(201).body(repository.save(tema));
 	}
 
 	@DeleteMapping("/{id}")
