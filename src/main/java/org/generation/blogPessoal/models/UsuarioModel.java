@@ -25,10 +25,14 @@ public class UsuarioModel {
 	@NotBlank
 	private String nome;
 	
+	
+	private String usuario;
+	
 	@Email
 	private String email;
 	
-	@NotBlank @Size(min = 5, max = 8)
+	@NotBlank 
+	@Size(min = 5, max = 100)
 	private String senha;
 
 	@OneToMany(mappedBy = "criadorPostagem", cascade = CascadeType.ALL)
@@ -73,6 +77,14 @@ public class UsuarioModel {
 
 	public void setPostagens(List<PostagemModel> postagens) {
 		this.postagens = postagens;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 
 }
