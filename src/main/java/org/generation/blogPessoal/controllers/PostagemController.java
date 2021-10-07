@@ -52,4 +52,9 @@ public class PostagemController {
 	public ResponseEntity<PostagemModel> put (@Valid @RequestBody PostagemModel novaPostagem){
 		return ResponseEntity.status(201).body(repository.save(novaPostagem));
 	}
+
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable long id) {
+		repository.deleteById(id);
+	}
 }
