@@ -1,6 +1,7 @@
 package org.generation.blogPessoal.security;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 import org.generation.blogPessoal.models.UsuarioModel;
 import org.springframework.security.core.GrantedAuthority;
