@@ -38,6 +38,16 @@ public class UsuarioModel {
 	@OneToMany(mappedBy = "criadorPostagem", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("criadorPostagem")
 	private List<PostagemModel> postagens = new ArrayList<>();
+	
+	public UsuarioModel(long idUsuario, String nome,String email,String senha) {
+		this.idUsuario = idUsuario;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+	}
+
+	public UsuarioModel() {
+	}
 
 	public long getIdUsuario() {
 		return idUsuario;
