@@ -1,6 +1,7 @@
 package org.generation.blogPessoal.services;
 
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
@@ -47,5 +48,21 @@ public class UsuarioService {
 		return  null;
 	}
 	
+	public List<UsuarioModel> buscarTodos(){
+		return repository.findAll();	
+		}
+	
+	public List<UsuarioModel> buscarPorNome(String nome){
+		return repository.findAllByNomeContainingIgnoreCase(nome);
+	}
+	
+	public Optional<UsuarioModel> buscarPorId(long id) {
+		return repository.findById(id);
+	}
+	
+	public void deletar(long id){
+		repository.deleteById(id);
+		
+	}
 	
 	}

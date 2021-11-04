@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
+
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class UsuarioModelTest {
 
@@ -27,7 +28,7 @@ class UsuarioModelTest {
 	
 	@BeforeEach
 	public void start() {
-		usuario = new UsuarioModel(0, "Patricia", "patricia@email.com", "134652");
+		usuario = new UsuarioModel("Patricia", "patricia@email.com", "134652");
 	}
 	
 	@Test
@@ -39,7 +40,7 @@ class UsuarioModelTest {
 	
 	@Test
 	void validaNomeDeUsuarioIncorretoRetornaFalse() {
-		UsuarioModel usuarioErro = new UsuarioModel(0, null, "patricia@email.com", "134652");
+		UsuarioModel usuarioErro = new UsuarioModel("", "patricia@email.com", "134652");
 		Set<ConstraintViolation<UsuarioModel>> objetoViolado = validator.validate(usuarioErro);
 		
 		assertFalse(objetoViolado.isEmpty());

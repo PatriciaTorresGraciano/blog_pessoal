@@ -25,7 +25,6 @@ public class UsuarioModel {
 	@NotBlank
 	private String nome;
 	
-	
 	private String usuario;
 	
 	@Email
@@ -39,14 +38,22 @@ public class UsuarioModel {
 	@JsonIgnoreProperties("criadorPostagem")
 	private List<PostagemModel> postagens = new ArrayList<>();
 	
-	public UsuarioModel(long idUsuario, String nome,String email,String senha) {
-		this.idUsuario = idUsuario;
+	public UsuarioModel(String nome,String email,String senha) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 	}
 
 	public UsuarioModel() {
+	}
+	
+	public UsuarioModel(long idUsuario, @NotBlank String nome, @Email String email,
+			@NotBlank @Size(min = 5, max = 100) String senha) {
+		super();
+		this.idUsuario = idUsuario;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
 	}
 
 	public long getIdUsuario() {

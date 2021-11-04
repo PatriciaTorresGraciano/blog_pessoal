@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.catalina.Lifecycle;
 import org.generation.blogPessoal.models.UsuarioModel;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -30,7 +30,7 @@ class UsuarioRepositoryTest {
 		if(!repository.findByEmail(objetoUsuario1.getEmail()).isPresent())
 			repository.save(objetoUsuario1);
 		
-		UsuarioModel objetoUsuario2 = new UsuarioModel("usuario2", "usuario1@email.com", "134652");
+		UsuarioModel objetoUsuario2 = new UsuarioModel("usuario2", "usuario2@email.com", "134652");
 		if(!repository.findByEmail(objetoUsuario2.getEmail()).isPresent())
 			repository.save(objetoUsuario2);
 	}
