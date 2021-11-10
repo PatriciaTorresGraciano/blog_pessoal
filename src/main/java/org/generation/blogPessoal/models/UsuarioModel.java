@@ -1,6 +1,5 @@
 package org.generation.blogPessoal.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,12 +16,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.swagger.annotations.ApiModelProperty;
 
-@Entity(name = "tb_usuario")
+@Entity(name = "usuario")
 public class UsuarioModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idUsuario;
+	private long id;
 	
 	@NotBlank
 	private String nome;
@@ -36,10 +35,14 @@ public class UsuarioModel {
 	@NotBlank 
 	@Size(min = 5, max = 100)
 	private String senha;
+	
+	private String foto;
+	
+	private String tipo;
 
-	@OneToMany(mappedBy = "criadorPostagem", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("criadorPostagem")
-	private List<PostagemModel> postagens = new ArrayList<>();
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("usuario")
+	private List<PostagemModel> postagem;
 	
 	public UsuarioModel(String nome,String email,String senha) {
 		this.nome = nome;
@@ -50,21 +53,31 @@ public class UsuarioModel {
 	public UsuarioModel() {
 	}
 	
-	public UsuarioModel(long idUsuario, @NotBlank String nome, @Email String email,
+	public UsuarioModel(long id, @NotBlank String nome, @Email String email,
 			@NotBlank @Size(min = 5, max = 100) String senha) {
 		super();
-		this.idUsuario = idUsuario;
+		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 	}
 
-	public long getIdUsuario() {
-		return idUsuario;
+	
+
+	public long getId() {
+		return id;
 	}
 
-	public void setIdUsuario(long idUsuario) {
-		idUsuario = idUsuario;
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public List<PostagemModel> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<PostagemModel> postagem) {
+		this.postagem = postagem;
 	}
 
 	public String getNome() {
@@ -92,11 +105,11 @@ public class UsuarioModel {
 	}
 
 	public List<PostagemModel> getPostagens() {
-		return postagens;
+		return postagem;
 	}
 
-	public void setPostagens(List<PostagemModel> postagens) {
-		this.postagens = postagens;
+	public void setPostagens(List<PostagemModel> postagem) {
+		this.postagem = postagem;
 	}
 
 	public String getUsuario() {
@@ -107,4 +120,21 @@ public class UsuarioModel {
 		this.usuario = usuario;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	
 }

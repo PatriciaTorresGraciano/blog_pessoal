@@ -34,14 +34,14 @@ public class PostagemModel {
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 	
 	@ManyToOne
-	@JoinColumn(name = "idUsuario")
-	@JsonIgnoreProperties("postagens")
-	private UsuarioModel criadorPostagem;
+	@JoinColumn(name = "usuario_id")
+	@JsonIgnoreProperties("postagem")
+	private UsuarioModel usuario;
 
 	@ManyToOne
-	@JoinColumn(name = "idTema")
-	@JsonIgnoreProperties("postagens")
-	private TemaModel temaRelacionado;
+	@JoinColumn(name = "tema_id")
+	@JsonIgnoreProperties("postagem")
+	private TemaModel tema;
 	
 	
 	public long getId() {
@@ -69,16 +69,29 @@ public class PostagemModel {
 		this.data = data;
 	}
 	public UsuarioModel getCriadorPostagem() {
-		return criadorPostagem;
+		return usuario;
 	}
-	public void setCriadorPostagem(UsuarioModel criadorPostagem) {
-		this.criadorPostagem = criadorPostagem;
+	public void setCriadorPostagem(UsuarioModel usuario) {
+		this.usuario = usuario;
 	}
 	public TemaModel getTemaRelacionado() {
-		return temaRelacionado;
+		return tema;
 	}
-	public void setTemaRelacionado(TemaModel temaRelacionado) {
-		this.temaRelacionado = temaRelacionado;
+	public void setTemaRelacionado(TemaModel tema) {
+		this.tema = tema;
 	}
+	public UsuarioModel getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(UsuarioModel usuario) {
+		this.usuario = usuario;
+	}
+	public TemaModel getTema() {
+		return tema;
+	}
+	public void setTema(TemaModel tema) {
+		this.tema = tema;
+	}
+	
 	
 }
